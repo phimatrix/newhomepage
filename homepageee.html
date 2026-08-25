@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SeedLaunch gives seed-stage SaaS and AI founders the clarity, positioning, and GTM narrative to launch with conviction." />
+  <title>SeedLaunch — Clarity before scale</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap');
+
+    :root {
+      --ink: #11201b; --ink-soft: #26362f; --paper: #f8f6f1; --paper-deep: #eee9df;
+      --surface: #ffffff; --signal: #e84b3c; --signal-dark: #c83a2e; --sage: #dfe5da;
+      --sage-deep: #68756e; --line: #d9ddd5;
+      --motion-fast: 140ms; --motion-base: 220ms; --motion-slow: 460ms; --motion-hero: 760ms;
+      --ease-standard: cubic-bezier(.23,1,.32,1); --ease-emphasized: cubic-bezier(.77,0,.175,1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: "DM Sans", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+    ::selection { background: var(--signal); color: #fff; }
+    .page { overflow: clip; }
+    .frame { width: min(calc(100% - 2rem), 1240px); margin-inline: auto; }
+    .serif { font-family: "Newsreader", Georgia, serif; }
+    .eyebrow { display: inline-flex; align-items: center; gap: .55rem; color: var(--sage-deep); font-size: .67rem; font-weight: 700; letter-spacing: .16em; line-height: 1; text-transform: uppercase; }
+    .eyebrow::before { width: .42rem; height: .42rem; border-radius: 50%; background: var(--signal); content: ""; }
+    .section { position: relative; padding-block: clamp(5rem, 9vw, 8.5rem); }
+    .section.rule { border-top: 1px solid var(--line); }
+    .numbered { display: grid; grid-template-columns: 10rem minmax(0,1fr); gap: clamp(2rem,5vw,6rem); }
+    .section-index { position: relative; color: var(--sage-deep); font-size: .67rem; font-weight: 700; letter-spacing: .14em; padding-top: .35rem; }
+    .section-index::before { display: block; width: 2.85rem; height: 1px; margin-bottom: .7rem; background: var(--line); box-shadow: 0 0 0 3px var(--paper),0 0 0 4px var(--signal); content:""; transform: scaleX(.35); transform-origin: left; transition: transform var(--motion-slow) var(--ease-emphasized); }
+    .section-index.visible::before { transform: scaleX(1); }
+    .section-index b { color: var(--signal); }
+    .copy { max-width: 44rem; }
+    .title { max-width: 12ch; margin: 1rem 0 0; color: var(--ink); font-family: "Newsreader", Georgia, serif; font-size: clamp(2.75rem,5vw,5.2rem); font-weight: 600; letter-spacing: -.055em; line-height: .93; }
+    .lede { max-width: 39rem; margin: 1.5rem 0 0; color: var(--sage-deep); font-size: 1.04rem; line-height: 1.75; }
+    .button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: .6rem; border: 1px solid var(--signal); border-radius: .5rem; background: var(--signal); box-shadow: 0 7px 0 rgba(17,32,27,.11); color: #fff; font-size: .84rem; font-weight: 700; letter-spacing: .01em; padding: .7rem 1rem; transition: transform var(--motion-fast) var(--ease-standard),background var(--motion-fast) ease,box-shadow var(--motion-base) var(--ease-standard); }
+    .button:hover { background: var(--signal-dark); box-shadow: 0 10px 0 rgba(17,32,27,.11); transform: translateY(-2px); }
+    .button:active { box-shadow: 0 3px 0 rgba(17,32,27,.11); transform: translateY(2px) scale(.98); }
+    .button.secondary { border-color: rgba(248,246,241,.34); background: transparent; box-shadow: none; color: #fff; }
+    .button.secondary:hover { border-color: rgba(248,246,241,.78); background: rgba(248,246,241,.11); }
+    .arrow { font-size: 1.05em; line-height: 1; }
+
+    /* Hero: no navigation header and exact reference headline retained. */
+    .hero { position: relative; background: var(--ink); color: #fff; }
+    .hero::before { position: absolute; inset: 0; opacity: .28; background-image: linear-gradient(rgba(248,246,241,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(248,246,241,.12) 1px,transparent 1px); background-size: 48px 48px; content:""; mask-image: linear-gradient(90deg,#000 0%,#000 38%,transparent 80%); }
+    .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0,1.06fr) minmax(20rem,.94fr); min-height: clamp(42rem,86vh,52rem); }
+    .hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; padding: clamp(5.5rem,10vw,9.8rem) clamp(1.2rem,6vw,6rem) clamp(4.5rem,8vw,6.4rem) 0; }
+    .brand { display: flex; align-items: center; gap: .55rem; margin-bottom: clamp(2.4rem,4vw,3.8rem); color: #fff; font-size: .94rem; font-weight: 700; letter-spacing: -.055em; }
+    .brand img { width: 1.4rem; height: 1.4rem; object-fit: contain; }
+    .brand strong span { color: #f4a094; }
+    .brand i { width: 1.55rem; height: 1px; margin-left: .1rem; background: rgba(248,246,241,.36); }
+    .brand small { color: #bfc9c0; font-size: .55rem; font-style: normal; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .hero-kicker { display: inline-flex; align-items: center; gap: .55rem; margin-bottom: 1.5rem; color: #c8d1c7; font-size: .71rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .hero-kicker::before { color: var(--signal); content: "01"; }
+    .hero-title { max-width: 11.5ch; margin: 0; color: #fbfaf5; font-family: "Newsreader", Georgia, serif; font-size: clamp(4rem,7.6vw,7.5rem); font-weight: 600; letter-spacing: -.075em; line-height: .83; }
+    .hero-title em { color: #f4a094; font-style: normal; }
+    .hero-lede { max-width: 36rem; margin: 2rem 0 0; color: #d4d9d2; font-size: clamp(1rem,1.6vw,1.16rem); line-height: 1.72; }
+    .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.1rem; }
+    .pills { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 2.6rem; }
+    .pill { display: inline-flex; align-items: center; gap: .42rem; border: 1px solid rgba(248,246,241,.16); border-radius: 99rem; color: #cfd6ce; font-size: .72rem; font-weight: 500; padding: .42rem .68rem; transition: border-color var(--motion-fast) ease,background var(--motion-fast) ease,transform var(--motion-fast) var(--ease-standard); }
+    .pill b { color: #f4a094; font-size: .9rem; }
+    .hero-visual { position: relative; min-height: 36rem; overflow: hidden; border-left: 1px solid rgba(248,246,241,.15); clip-path: inset(0 0 0 100%); transition: clip-path var(--motion-hero) var(--ease-emphasized); }
+    .hero-visual.visible { clip-path: inset(0 0 0 0); }
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.055); transition: transform var(--motion-hero) var(--ease-standard); }
+    .hero-visual.visible img { transform: scale(1); }
+    .side-note { position: absolute; top: 50%; right: 1.3rem; transform: translateY(-50%) rotate(90deg); transform-origin: right center; color: rgba(248,246,241,.65); font-size: .58rem; font-weight: 700; letter-spacing: .15em; }
+    .visual-caption { position: absolute; right: 1.3rem; bottom: 1.4rem; left: 1.3rem; display: flex; align-items: end; justify-content: space-between; gap: 1rem; color: #fff; }
+    .visual-caption i { width: 44%; height: 1px; background: rgba(255,255,255,.65); }
+    .visual-caption p { max-width: 12rem; margin: 0; color: rgba(255,255,255,.9); font-size: .64rem; font-weight: 700; letter-spacing: .09em; line-height: 1.45; text-align: right; text-transform: uppercase; }
+    .beat { opacity: 0; transform: translate3d(0,12px,0); transition: opacity var(--motion-slow) var(--ease-standard),transform var(--motion-slow) var(--ease-standard); }
+    .hero-copy.visible .beat { opacity: 1; transform: none; }
+    .hero-copy.visible .beat:nth-child(1) { transition-delay: 45ms; }
+    .hero-copy.visible .beat:nth-child(2) { transition-delay: 95ms; }
+    .hero-copy.visible .beat:nth-child(3) { transition-delay: 140ms; }
+    .hero-copy.visible .beat:nth-child(4) { transition-delay: 205ms; }
+    .hero-copy.visible .beat:nth-child(5) { transition-delay: 265ms; }
+    .hero-copy.visible .beat:nth-child(6) { transition-delay: 325ms; }
+    .ribbon { border-bottom: 1px solid var(--line); background: var(--paper-deep); }
+    .ribbon-row { display: flex; min-height: 4.5rem; align-items: center; gap: 1.5rem; overflow: hidden; }
+    .ribbon-title { flex: 0 0 auto; font-size: .72rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .ribbon-title b { color: var(--signal); }
+    .ribbon-items { display: flex; min-width: max-content; align-items: center; gap: 1.65rem; color: var(--sage-deep); font-size: .78rem; font-weight: 600; }
+    .ribbon-items span::before { margin-right: .5rem; color: var(--signal); content: "+"; }
+
+    .impact strong { color: var(--signal); font-weight: inherit; }
+    .grid-four { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; margin-top:clamp(3rem,5vw,4.5rem); border:1px solid var(--line); background:var(--line); }
+    .problem { min-height:15rem; background:var(--surface); padding:1.5rem; transition:background var(--motion-base) ease,transform var(--motion-base) var(--ease-standard),box-shadow var(--motion-base) var(--ease-standard); }
+    .problem .num, .tiny-num { color:var(--signal); font-size:.68rem; font-weight:700; letter-spacing:.12em; }
+    .problem h3 { margin:2.7rem 0 0; font-size:1rem; letter-spacing:-.025em; }
+    .problem p { margin:.65rem 0 0; color:var(--sage-deep); font-size:.82rem; line-height:1.65; }
+    .sage-section { background:#edf0e9; }
+    .split { display:grid; grid-template-columns:minmax(0,.9fr) minmax(22rem,1.1fr); gap:clamp(2rem,6vw,7.5rem); align-items:center; }
+    .image-panel { position:relative; min-height:31rem; overflow:hidden; background:#d8ded4; }
+    .image-panel img { width:100%; height:100%; object-fit:cover; transition:transform var(--motion-slow) var(--ease-standard); }
+    .stamp { position:absolute; top:1.25rem; right:1.25rem; display:grid; width:4.5rem; height:4.5rem; place-items:center; border:1px solid rgba(17,32,27,.4); border-radius:50%; font-size:.58rem; font-weight:700; letter-spacing:.07em; line-height:1.2; text-align:center; text-transform:uppercase; }
+    .steps { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:2.2rem; }
+    .step { border:1px solid #bac4b7; border-radius:99rem; color:var(--ink-soft); font-size:.72rem; font-weight:700; padding:.55rem .8rem; }
+    .step b { color:var(--signal); }
+    .phase-list { margin-top:2.5rem; border-top:1px solid #bac4b7; }
+    .phase-row { display:grid; grid-template-columns:3.5rem minmax(0,1fr) auto; gap:1rem; align-items:center; border-bottom:1px solid #bac4b7; padding:1.05rem 0; }
+    .phase-row b { color:var(--signal); font-size:.66rem; letter-spacing:.12em; }
+    .phase-row strong { font-size:.95rem; }
+    .phase-row small { color:var(--sage-deep); font-size:.74rem; text-align:right; }
+    .cards-three { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:3rem; }
+    .phase-card { position:relative; min-height:26rem; overflow:hidden; border-top:3px solid var(--ink); background:var(--surface); padding:1.45rem; transition:transform var(--motion-base) var(--ease-standard),box-shadow var(--motion-base) var(--ease-standard); }
+    .phase-card.featured { border-top-color:var(--signal); background:var(--ink); color:#fff; }
+    .phase-card .week { color:var(--signal); font-size:.67rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .phase-card.featured .week { color:#bfc9c0; }
+    .phase-card h3 { margin:2.3rem 0 0; font-family:"Newsreader",Georgia,serif; font-size:2.4rem; font-weight:600; letter-spacing:-.055em; line-height:.9; }
+    .phase-card p { margin:.65rem 0 0; color:var(--sage-deep); font-size:.78rem; line-height:1.5; }
+    .phase-card.featured p { color:#bfc9c0; }
+    .phase-card ul, .offer-card ul { display:flex; flex-direction:column; gap:.7rem; margin:2.1rem 0 0; padding:0; list-style:none; }
+    .phase-card li { display:flex; gap:.55rem; font-size:.78rem; line-height:1.45; }
+    .phase-card li::before { color:var(--signal); content:"↗"; font-weight:700; }
+    .phase-card .corner { position:absolute; right:1.35rem; bottom:1.25rem; color:var(--sage-deep); font-size:.62rem; font-weight:700; letter-spacing:.13em; }
+    .featured .corner { color:#bfc9c0; }
+    .deliverable-layout { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(19rem,.8fr); gap:clamp(2rem,6vw,7rem); align-items:end; }
+    .grid-two { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; margin-top:3.2rem; border:1px solid var(--line); background:var(--line); }
+    .deliverable { min-height:12.2rem; background:var(--paper); padding:1.45rem; transition:background var(--motion-base) ease,transform var(--motion-base) var(--ease-standard),box-shadow var(--motion-base) var(--ease-standard); }
+    .icon { display:grid; width:2.15rem; height:2.15rem; place-items:center; border:1px solid var(--line); border-radius:50%; color:var(--signal); font-weight:700; }
+    .deliverable h3 { margin:1.75rem 0 0; font-size:.95rem; letter-spacing:-.025em; }
+    .deliverable p { margin:.55rem 0 0; color:var(--sage-deep); font-size:.78rem; line-height:1.6; }
+    .field { position:relative; min-height:26rem; overflow:hidden; background:var(--paper-deep); }
+    .field img { width:100%; height:100%; object-fit:cover; transition:transform var(--motion-slow) var(--ease-standard); }
+    .field label { position:absolute; bottom:1.3rem; left:1.25rem; background:var(--paper); color:var(--ink); font-size:.64rem; font-weight:700; letter-spacing:.1em; padding:.55rem .7rem; text-transform:uppercase; }
+    .ink-section { background:var(--ink); color:#fff; }
+    .ink-section .title { color:#fff; }
+    .ink-section .lede { color:#bfc9c0; }
+    .ink-section .eyebrow { color:#c8d1c7; }
+    .ink-section .section-index { color:#fff; }
+    .transform-table { margin-top:3.25rem; border-top:1px solid rgba(248,246,241,.25); }
+    .t-head,.t-row { display:grid; grid-template-columns:1fr 1fr; }
+    .t-head div { color:#c8d1c7; font-size:.65rem; font-weight:700; letter-spacing:.11em; padding:.8rem 1rem; text-transform:uppercase; }
+    .t-head div:last-child { border-left:1px solid rgba(248,246,241,.18); color:#f4a094; }
+    .t-row { border-top:1px solid rgba(248,246,241,.18); }
+    .t-row div { color:#bfc9c0; font-size:.82rem; line-height:1.45; padding:1.05rem 1rem; }
+    .t-row div:last-child { border-left:1px solid rgba(248,246,241,.18); color:#fff; font-weight:600; }
+    .offer-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin-top:3rem; }
+    .offer-card { position:relative; min-height:30rem; overflow:hidden; border:1px solid var(--line); border-top:3px solid var(--ink); background:var(--surface); padding:clamp(1.4rem,3vw,2.2rem); transition:transform var(--motion-base) var(--ease-standard),box-shadow var(--motion-base) var(--ease-standard); }
+    .offer-card::before { position:absolute; top:1.08rem; right:1.15rem; color:var(--sage-deep); content:"PATH / 01"; font-size:.58rem; font-weight:700; letter-spacing:.13em; }
+    .offer-card:nth-child(2) { background:var(--ink); color:#fff; }
+    .offer-card:nth-child(2)::before { color:#bfc9c0; content:"PATH / 02"; }
+    .offer-card::after { position:absolute; top:-1px; right:-1px; width:2.1rem; height:2.1rem; border-bottom:1px solid var(--line); border-left:1px solid var(--line); background:var(--paper); clip-path:polygon(0 0,100% 100%,0 100%); content:""; }
+    .offer-card:nth-child(2)::after { border-color:rgba(248,246,241,.28); background:var(--paper-deep); }
+    .tag { display:inline-flex; border:1px solid var(--line); border-radius:99rem; color:var(--sage-deep); font-size:.65rem; font-weight:700; letter-spacing:.09em; padding:.42rem .65rem; text-transform:uppercase; }
+    .offer-card:nth-child(2) .tag { border-color:rgba(248,246,241,.3); color:#cfd6ce; }
+    .offer-card h3 { margin:3.5rem 0 0; font-family:"Newsreader",Georgia,serif; font-size:clamp(2.4rem,4.5vw,4rem); font-weight:600; letter-spacing:-.06em; line-height:.86; }
+    .price { margin-top:1.1rem; font-size:1.36rem; font-weight:700; letter-spacing:-.04em; }
+    .price span { color:var(--sage-deep); font-size:.72rem; font-weight:500; letter-spacing:0; }
+    .offer-card:nth-child(2) .price span,.offer-card:nth-child(2) .duration { color:#bfc9c0; }
+    .duration { margin-top:.75rem; color:var(--sage-deep); font-size:.76rem; }
+    .offer-card li { display:flex; gap:.55rem; font-size:.78rem; line-height:1.45; }
+    .offer-card li::before { color:var(--signal); content:"•"; font-size:1rem; line-height:.8; }
+    .offer-card .button { position:absolute; right:1.5rem; bottom:1.55rem; left:1.5rem; }
+    .offer-card:first-child .button { border-color:var(--ink); background:var(--ink); }
+    .fit-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; margin-top:3rem; border:1px solid var(--line); background:var(--line); }
+    .fit { position:relative; min-height:10.5rem; border-top:2px solid var(--ink); background:var(--surface); padding:1.25rem; transition:transform var(--motion-base) var(--ease-standard),background var(--motion-base) ease; }
+    .fit::before { position:absolute; top:.75rem; right:.8rem; color:var(--sage-deep); content:"FIT / 0"; font-size:.53rem; font-weight:700; letter-spacing:.12em; }
+    .fit.no { border-top-color:var(--signal); background:#f3dfda; }
+    .fit mark { background:none; color:#6e7b74; font-weight:700; }
+    .fit.no mark { color:var(--signal); }
+    .fit h3 { margin:2.1rem 0 0; font-size:.91rem; letter-spacing:-.025em; }
+    .fit p { margin:.5rem 0 0; color:var(--sage-deep); font-size:.76rem; line-height:1.55; }
+    .faq { background:var(--surface); }
+    .faq-layout { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:clamp(2rem,7vw,8rem); align-items:start; }
+    .faq-intro { position:sticky; top:2rem; }
+    .faq-list { border-top:1px solid var(--line); }
+    .faq-item { border-bottom:1px solid var(--line); }
+    .faq-button { display:flex; width:100%; align-items:center; gap:.7rem; border:0; background:transparent; color:var(--ink); cursor:pointer; padding:1.2rem 0; text-align:left; }
+    .faq-button b { flex:0 0 auto; color:var(--signal); font-size:.66rem; letter-spacing:.12em; }
+    .faq-button span { flex:1; font-size:.91rem; font-weight:700; line-height:1.45; }
+    .faq-button i { width:.75rem; height:.75rem; border-right:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink); transform:rotate(45deg) translateY(-3px); transition:transform var(--motion-base) var(--ease-standard); }
+    .faq-item.open .faq-button i { transform:rotate(225deg) translate(-1px,-2px); }
+    .faq-answer { display:grid; grid-template-rows:0fr; transition:grid-template-rows var(--motion-base) var(--ease-standard); }
+    .faq-item.open .faq-answer { grid-template-rows:1fr; }
+    .faq-answer > div { overflow:hidden; color:var(--sage-deep); font-size:.82rem; line-height:1.7; }
+    .faq-answer p { margin:0; padding-bottom:1.2rem; }
+    .final { position:relative; overflow:hidden; border-top:1px solid rgba(248,246,241,.16); background:var(--ink); color:#fff; }
+    .final::before { position:absolute; inset:0; opacity:.16; background-image:linear-gradient(rgba(248,246,241,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(248,246,241,.35) 1px,transparent 1px); background-size:48px 48px; content:""; mask-image:linear-gradient(90deg,transparent,#000 45%,transparent); }
+    .final::after { position:absolute; right:clamp(1.5rem,10vw,11rem); bottom:-6rem; width:11rem; height:11rem; border:1px solid rgba(248,246,241,.35); border-radius:50%; box-shadow:inset 0 0 0 2.5rem var(--ink),inset 0 0 0 2.65rem var(--signal); content:""; }
+    .final-inner { position:relative; display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:end; padding-block:clamp(4rem,7vw,6rem); }
+    .final .title { color:#fff; font-size:clamp(3.5rem,6vw,6.5rem); letter-spacing:-.075em; line-height:.84; }
+    .final p { max-width:31rem; margin:1.6rem 0 0; color:rgba(255,255,255,.88); font-size:1rem; line-height:1.7; }
+    .final .button { position:relative; z-index:1; }
+
+    [data-reveal] { opacity:0; transform:translate3d(0,14px,0); transition:opacity var(--motion-slow) var(--ease-standard),transform var(--motion-slow) var(--ease-standard); }
+    [data-reveal].visible { opacity:1; transform:none; }
+    [data-delay="1"] { transition-delay:55ms; } [data-delay="2"] { transition-delay:110ms; } [data-delay="3"] { transition-delay:165ms; }
+    @media (hover:hover) and (pointer:fine) {
+      .pill:hover { border-color:rgba(248,246,241,.42); background:rgba(248,246,241,.08); transform:translateY(-2px); }
+      .problem:hover { background:#fffdfa; box-shadow:0 10px 0 rgba(17,32,27,.05); transform:translateY(-3px); }
+      .deliverable:hover { background:#fff; box-shadow:0 9px 0 rgba(17,32,27,.05); transform:translateY(-3px); }
+      .phase-card:hover { box-shadow:0 11px 0 rgba(17,32,27,.08); transform:translateY(-3px); }
+      .offer-card:hover { box-shadow:0 10px 0 rgba(17,32,27,.09); transform:translateY(-3px); }
+      .fit:hover { background:#fffdfa; transform:translateY(-2px); }
+      .image-panel:hover img,.field:hover img { transform:scale(1.035); }
+    }
+    @media (max-width: 1040px) { .grid-four{grid-template-columns:repeat(2,minmax(0,1fr));}.fit-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+    @media (max-width: 780px) {
+      .frame { width:min(calc(100% - 1.5rem),1240px); }.hero-grid,.split,.deliverable-layout,.faq-layout{grid-template-columns:1fr;}.hero-copy{padding:5.25rem 0 3rem;}.hero-visual{min-height:26rem;border-top:1px solid rgba(248,246,241,.15);border-left:0;}.hero-visual img{object-position:center 52%;}.side-note{display:none;}.section{padding-block:4.75rem;}.numbered{grid-template-columns:1fr;gap:1.5rem;}.method-visual{order:2;min-height:24rem;}.method-copy{order:1;}.field{min-height:22rem;}.faq-intro{position:static;}.final-inner{grid-template-columns:1fr;align-items:start;}.final-inner .button{width:max-content;}
+    }
+    @media (max-width:560px) {
+      .hero-title{font-size:clamp(3.35rem,16vw,4.55rem);}.actions{flex-direction:column;align-items:stretch;}.actions .button{width:100%;}.ribbon-row{gap:1rem;}.ribbon-items{gap:1rem;}.grid-four,.cards-three,.grid-two,.offer-grid,.fit-grid{grid-template-columns:1fr;}.problem{min-height:12rem;}.problem h3{margin-top:1.45rem;}.phase-card{min-height:20rem;}.t-head,.t-row{grid-template-columns:1fr;}.t-head div:last-child,.t-row div:last-child{border-top:1px solid rgba(248,246,241,.18);border-left:0;}.offer-card{min-height:27rem;}.final .title{font-size:clamp(3.2rem,15vw,4.2rem);}
+    }
+    @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto;}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}[data-reveal],.beat{opacity:1!important;transform:none!important;clip-path:none!important;}.hero-visual img{transform:none!important;} }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main>
+      <section class="hero" id="top">
+        <div class="frame hero-grid">
+          <div class="hero-copy" data-reveal>
+            <div class="brand beat"><img src="assets/seedlaunch-mark.png" alt="" /><strong>SeedLaunch<span>.</span></strong><i></i><small>Strategy field guide</small></div>
+            <div class="hero-kicker beat">For seed-stage SaaS &amp; AI founders</div>
+            <h1 class="hero-title beat">Launch your seed-stage startup with <em>conviction.</em></h1>
+            <p class="hero-lede beat">SeedLaunch gives early-stage founders the ICP clarity, positioning framework, and brand narrative they need to go to market—and raise—with confidence.</p>
+            <div class="actions beat"><a class="button" href="#clarity">Claim your free consultation <span class="arrow">→</span></a><a class="button secondary" href="#offer">See the offer <span class="arrow">↗</span></a></div>
+            <div class="pills beat"><span class="pill"><b>◎</b> ICP clarity</span><span class="pill"><b>◉</b> Positioning</span><span class="pill"><b>✎</b> Brand manifesto</span><span class="pill"><b>▣</b> GTM narrative</span></div>
+          </div>
+          <div class="hero-visual" data-hero-visual><img src="assets/seedlaunch-hero-signal.png" alt="A vermilion signal form moving through layered midnight strategy planes" /><span class="side-note">FIELD NOTE / 01 — MAKE THE MARKET UNDERSTAND</span><div class="visual-caption"><i></i><p>Clarity is the first growth lever.</p></div></div>
+        </div>
+      </section>
+
+      <div class="ribbon"><div class="frame ribbon-row"><div class="ribbon-title">Clarity <b>before</b> scale</div><div class="ribbon-items"><span>ICP diagnosis</span><span>Strategic positioning</span><span>GTM narrative</span><span>Investor story</span></div></div></div>
+
+      <section class="section" id="problem"><div class="frame numbered"><div class="section-index" data-reveal><b>02</b><br>The problem</div><div><div class="copy" data-reveal><span class="eyebrow">The expensive kind of ambiguity</span><h2 class="title impact">You raised seed funding. Now <strong>nobody knows</strong> what you do.</h2><p class="lede">Most early-stage founders spend months building the product and zero time building the narrative around it. Then wonder why demos do not convert and investors pass.</p></div><div class="grid-four"><article class="problem" data-reveal><div class="num">01</div><h3>Fuzzy ICP</h3><p>“SMBs” is not an ICP. Founders who cannot name their exact buyer spend months selling to everyone and converting no one.</p></article><article class="problem" data-reveal data-delay="1"><div class="num">02</div><h3>Broken positioning</h3><p>Your homepage, deck, and sales pitch all say different things. Investors and customers lose confidence before the call ends.</p></article><article class="problem" data-reveal data-delay="2"><div class="num">03</div><h3>No compelling narrative</h3><p>You have a strong product but cannot explain it in a way that makes people lean in. Deals stall. Investors pass.</p></article><article class="problem" data-reveal data-delay="3"><div class="num">04</div><h3>GTM confusion</h3><p>Without a clear ICP and narrative, every channel feels random. Spend rises. Pipeline goes nowhere.</p></article></div></div></div></section>
+
+      <section class="section sage-section" id="method"><div class="frame split"><div class="image-panel" data-reveal><img src="assets/seedlaunch-method-map.png" alt="An editorial map showing three strategic stages connected by one signal path" /><span class="stamp">SeedLaunch<br>method</span></div><div class="method-copy" data-reveal data-delay="1"><span class="eyebrow">The SeedLaunch method</span><h2 class="title">Three phases. Three weeks. Total clarity.</h2><p class="lede">A structured sprint that takes you from fuzzy messaging to a complete positioning and narrative stack—ready to use across every channel.</p><div class="steps"><span class="step"><b>01</b> Clarify</span><span class="step"><b>02</b> Craft</span><span class="step"><b>03</b> Launch</span></div><div class="phase-list"><div class="phase-row"><b>01</b><strong>Clarify</strong><small>ICP &amp; customer intelligence</small></div><div class="phase-row"><b>02</b><strong>Craft</strong><small>Positioning &amp; narrative</small></div><div class="phase-row"><b>03</b><strong>Launch</strong><small>GTM activation</small></div></div></div></div></section>
+
+      <section class="section rule"><div class="frame numbered"><div class="section-index" data-reveal><b>03</b><br>The sprint</div><div><div class="copy" data-reveal><span class="eyebrow">Work that compounds</span><h2 class="title">A decision system, not another deck.</h2></div><div class="cards-three"><article class="phase-card" data-reveal><div class="week">Week 1</div><h3>Clarify</h3><p>ICP &amp; customer intelligence</p><ul><li>ICP deep-dive workshop</li><li>Pain mapping session</li><li>Ideal customer profile card</li><li>ICP validation framework</li></ul><span class="corner">01/03</span></article><article class="phase-card featured" data-reveal data-delay="1"><div class="week">Week 2</div><h3>Craft</h3><p>Positioning &amp; narrative</p><ul><li>Positioning statement</li><li>Competitive differentiation</li><li>Brand manifesto</li><li>Value prop hierarchy</li></ul><span class="corner">02/03</span></article><article class="phase-card" data-reveal data-delay="2"><div class="week">Week 3</div><h3>Launch</h3><p>GTM activation</p><ul><li>GTM narrative document</li><li>Homepage copy brief</li><li>Investor pitch narrative</li><li>30-day activation plan</li></ul><span class="corner">03/03</span></article></div></div></div></section>
+
+      <section class="section rule"><div class="frame deliverable-layout"><div><div class="copy" data-reveal><span class="eyebrow">What we deliver</span><h2 class="title">Everything your GTM needs to work.</h2><p class="lede">Not tactics. Not templates. The strategic foundation that makes every channel, every call, and every pitch perform.</p></div><div class="grid-two"><article class="deliverable" data-reveal><div class="icon">◎</div><h3>ICP clarity</h3><p>Define precisely who your product is for, what triggers them to buy, and what success looks like for them.</p></article><article class="deliverable" data-reveal data-delay="1"><div class="icon">◉</div><h3>Positioning</h3><p>Craft a differentiated value proposition that makes a meaningful distinction in a crowded category.</p></article><article class="deliverable" data-reveal data-delay="2"><div class="icon">✎</div><h3>Brand manifesto</h3><p>Write the founder point of view that attracts the right ICP and repels the wrong fit.</p></article><article class="deliverable" data-reveal data-delay="3"><div class="icon">▣</div><h3>GTM narrative</h3><p>Build the story that powers your homepage, deck, sales calls, and every channel you run.</p></article></div></div><div class="field" data-reveal data-delay="2"><img src="assets/seedlaunch-field-object.png" alt="A strategy field guide and signal marker arranged on a work surface" /><label>The foundation / made usable</label></div></div></section>
+
+      <section class="section ink-section"><div class="frame numbered"><div class="section-index" data-reveal><b>04</b><br>The transformation</div><div><div class="copy" data-reveal><span class="eyebrow">Before / after</span><h2 class="title">Positioning is an upstream decision.</h2><p class="lede">It determines whether everything downstream gets sharper—or gets more expensive.</p></div><div class="transform-table" data-reveal data-delay="1"><div class="t-head"><div>Before SeedLaunch</div><div>After SeedLaunch</div></div><div class="t-row"><div>No clear ICP — selling to everyone</div><div>One tight ICP — selling to the right buyer</div></div><div class="t-row"><div>Three different stories on three channels</div><div>One consistent narrative across everything</div></div><div class="t-row"><div>Vague value proposition that sounds like everyone</div><div>A differentiated position no competitor owns</div></div><div class="t-row"><div>GTM stalling — no idea which lever to pull</div><div>Clear GTM motion with a narrative that converts</div></div><div class="t-row"><div>Investors passing on your pitch</div><div>A Series A-ready story that builds conviction</div></div></div></div></div></section>
+
+      <section class="section" id="offer"><div class="frame numbered"><div class="section-index" data-reveal><b>05</b><br>Choose your launch</div><div><div class="copy" data-reveal><span class="eyebrow">Where are you right now?</span><h2 class="title">Which part of your launch are you in?</h2><p class="lede">SeedLaunch works with founders at two different moments. Pick the one that matches where you are today.</p></div><div class="offer-grid"><article class="offer-card" data-reveal><span class="tag">Just raised, pre-revenue</span><h3>Get initial clarity</h3><div class="price">$197 <span>one-time</span></div><div class="duration">◉ Self-guided, 5 business days</div><ul><li>ICP Clarity Worksheet, guided async</li><li>Positioning self-audit with feedback</li><li>Written recommendations report</li><li>30-minute strategy call to review findings</li></ul><a class="button" href="#clarity">Start with Seed <span class="arrow">→</span></a></article><article class="offer-card" data-reveal data-delay="1"><span class="tag">Ready to go to market</span><h3>Launch with a full sprint</h3><div class="price">$1,997 <span>flat · then $1,997/mo to scale</span></div><div class="duration">◉ 4-week sprint, then ongoing</div><ul><li>Four-week live sprint, four sessions</li><li>Full ICP and positioning deliverables</li><li>Brand manifesto and GTM narrative doc</li><li>Homepage copy brief and investor pitch narrative</li><li>Optional ongoing Scale partnership</li></ul><a class="button" href="#clarity">Book a Clarity Kit <span class="arrow">→</span></a></article></div></div></div></section>
+
+      <section class="section sage-section" id="who"><div class="frame numbered"><div class="section-index" data-reveal><b>06</b><br>Founder fit</div><div><div class="copy" data-reveal><span class="eyebrow">Who we work with</span><h2 class="title">Built for founders at the hardest stage.</h2><p class="lede">SeedLaunch is for early-stage SaaS and AI founders who are ready to stop guessing and start building GTM on a foundation that holds.</p></div><div class="fit-grid"><article class="fit" data-reveal><mark>✓</mark><h3>You just raised seed funding</h3><p>You need to go to market—but your messaging is not ready yet.</p></article><article class="fit" data-reveal data-delay="1"><mark>✓</mark><h3>You’re pre-Series A</h3><p>You know your positioning will make or break your raise.</p></article><article class="fit" data-reveal data-delay="2"><mark>✓</mark><h3>You have a product but no clear ICP</h3><p>You are selling to everyone and converting no one.</p></article><article class="fit" data-reveal><mark>✓</mark><h3>Your GTM is stalling</h3><p>Ads are not converting, sales cycles are long, pipeline is slow.</p></article><article class="fit" data-reveal data-delay="1"><mark>✓</mark><h3>You’re a SaaS or AI company</h3><p>B2B preferred. Seed to Series A stage. US market or global.</p></article><article class="fit no" data-reveal data-delay="2"><mark>×</mark><h3>You’re not a fit if…</h3><p>You are pre-product, or looking for execution rather than positioning strategy.</p></article></div></div></div></section>
+
+      <section class="section faq" id="faq"><div class="frame faq-layout"><div class="faq-intro" data-reveal><span class="eyebrow">Questions founders ask</span><h2 class="title">Before you book the call.</h2><p class="lede">Straight answers about SeedLaunch, who it is for, what the engagement covers, and how to know what to do next.</p></div><div class="faq-list" data-reveal data-delay="1">
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>01</b><span>What exactly does SeedLaunch do?</span><i></i></button><div class="faq-answer"><div><p>SeedLaunch helps Seed to Series A B2B SaaS and AI startups identify and remove the strategic bottlenecks preventing predictable growth. We clarify your ICP, positioning, value proposition, messaging, narrative, and GTM strategy—then turn the work into a practical 90-day growth roadmap.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>02</b><span>Who is SeedLaunch best suited for?</span><i></i></button><div class="faq-answer"><div><p>SeedLaunch is designed for founder-led B2B SaaS and AI startups with early traction that are preparing to scale. The ideal client commonly has Seed to Series A funding, 5–50 employees, early paying customers, founder-led or early-stage sales, and a need for a repeatable GTM engine.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>03</b><span>Do I need product-market fit before working with SeedLaunch?</span><i></i></button><div class="faq-answer"><div><p>No—but you should have something in market. We can work with teams still validating their ICP and positioning, as well as teams with early traction that are struggling to scale. If you are still at the idea stage with no product or customers, SeedLaunch is probably premature.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>04</b><span>Is SeedLaunch a marketing agency?</span><i></i></button><div class="faq-answer"><div><p>No. We do not begin with “Let’s run some ads.” We begin with “What is actually preventing this company from growing?” Once the bottleneck is clear, we build the positioning, ICP, messaging, and GTM foundation required to solve it. Execution can come later.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>05</b><span>What is the Growth Foundation Sprint™?</span><i></i></button><div class="faq-answer"><div><p>The Growth Foundation Sprint™ is SeedLaunch’s flagship productized service. Over a focused engagement, we help establish the strategic foundation for growth: diagnose, position, define ICP, build messaging, develop GTM, and create a 90-day roadmap. The goal is clarity on who to target, what to say, where to focus, and what to do next.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>06</b><span>What will I have at the end of the engagement?</span><i></i></button><div class="faq-answer"><div><p>You leave with a practical growth foundation: a clear ICP, positioning statement, value proposition, competitive differentiation, messaging framework, strategic narrative, GTM strategy, acquisition priorities, 90-day growth roadmap, growth KPIs, and AI or automation opportunities. Most importantly, leadership has a shared understanding of the next focus area.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>07</b><span>Do you guarantee revenue or Series A funding?</span><i></i></button><div class="faq-answer"><div><p>No—and we do not think anyone credible should. Revenue and fundraising depend on factors outside a consultant’s control. The Clarity Guarantee™ is about the quality and completeness of the strategic work: if you finish without clear answers around your ICP, positioning, messaging, and GTM priorities, we continue working at no additional consulting fee until the foundations are complete.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>08</b><span>How much does SeedLaunch cost?</span><i></i></button><div class="faq-answer"><div><p>The Growth Foundation Sprint™ typically ranges from $4,997–$7,500, depending on stage, complexity, and scope. For startups that need ongoing strategic support, SeedLaunch also offers Fractional Growth Partner engagements. The work is priced around outcomes rather than hours.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>09</b><span>Why choose SeedLaunch instead of hiring a marketing agency?</span><i></i></button><div class="faq-answer"><div><p>The question is not “How do we execute more marketing?” It is “What should we execute—and why?” Traditional agencies often start with channels. SeedLaunch starts with diagnosis, identifies the growth bottleneck, and then determines which channels and tactics make sense. Clarity before scale is the operating principle.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>10</b><span>How do I differentiate when there are twenty companies doing the same thing?</span><i></i></button><div class="faq-answer"><div><p>This is especially painful for AI startups, where everyone says AI-powered, AI agent, AI automation, or AI copilot. The useful question is “Why would someone choose us?” That is a positioning problem. SeedLaunch helps identify the distinction your competitors do not own.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>11</b><span>When should I start spending money on marketing?</span><i></i></button><div class="faq-answer"><div><p>Capital does not automatically mean you are ready to scale. Before hiring a marketing team or increasing spend, confirm that the ICP is clear, positioning is validated, conversion is working, retention is healthy, and demand is repeatable.</p></div></div></article>
+        <article class="faq-item"><button class="faq-button" aria-expanded="false"><b>12</b><span>What do we need to prove before raising Series A?</span><i></i></button><div class="faq-answer"><div><p>The question is not only how to raise Series A; it is what evidence will convince investors that growth is repeatable. That evidence can include revenue growth, retention, CAC efficiency, pipeline, sales efficiency, ICP clarity, repeatable acquisition, market opportunity, and a coherent GTM narrative.</p></div></div></article>
+      </div></div></section>
+
+      <section class="final" id="clarity"><div class="frame final-inner"><div data-reveal><span class="eyebrow" style="color:#fff">The next useful conversation</span><h2 class="title">Ready to launch with conviction?</h2><p>Book a free 30-minute clarity call. We will look at your current positioning and tell you exactly what to fix first—no pitch, no obligation.</p></div><a class="button" data-reveal data-delay="1" href="mailto:hello@seedlaunch.co?subject=Clarity%20Call">Book your free clarity call <span class="arrow">→</span></a></div></section>
+    </main>
+  </div>
+  <script>
+    (() => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const heroCopy = document.querySelector('.hero-copy');
+      const heroVisual = document.querySelector('[data-hero-visual]');
+      const showHero = () => { heroCopy?.classList.add('visible'); heroVisual?.classList.add('visible'); };
+      if (reduceMotion) { showHero(); document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('visible')); }
+      else {
+        requestAnimationFrame(showHero);
+        const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+        }), { threshold: .1, rootMargin: '0px 0px -4% 0px' });
+        document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+      }
+      document.querySelectorAll('.faq-button').forEach((button) => button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const nextState = !item.classList.contains('open');
+        item.classList.toggle('open', nextState);
+        button.setAttribute('aria-expanded', String(nextState));
+      }));
+    })();
+  </script>
+</body>
+</html>
